@@ -1,1 +1,1 @@
-# twelve-factor
+# Twelve-Factor App with Spring and Cloud Foundry

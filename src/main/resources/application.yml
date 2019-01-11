@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: twelve-factor
+---
+spring:
+  profiles: local
+info:
+  application:
+    name: ${spring.application.name}
+    platform: ${os.name}
+---
+spring:
+  profiles: cloud
+info:
+  application:
+    name: ${vcap.application.name}
+    platform: ${platform.name}

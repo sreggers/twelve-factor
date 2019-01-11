@@ -1,0 +1,5 @@
+applications:
+  - name: twelve-factor
+    path: build/libs/twelve-factor.jar
+    env:
+      PLATFORM_NAME: Cloud Foundry

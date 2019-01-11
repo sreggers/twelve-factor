@@ -1,6 +1,9 @@
 spring:
   application:
     name: twelve-factor
+  jpa:
+    hibernate:
+      ddl-auto: update
 ---
 spring:
   profiles: local
@@ -11,6 +14,8 @@ info:
 ---
 spring:
   profiles: cloud
+  datasource:
+    url: ${vcap.services.twelve-factor-db.credentials.jdbc-url}
 info:
   application:
     name: ${vcap.application.name}

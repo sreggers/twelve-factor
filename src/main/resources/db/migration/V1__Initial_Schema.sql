@@ -1,0 +1,6 @@
+CREATE TABLE factor
+(
+	id BIGINT AUTO_INCREMENT PRIMARY KEY,
+	name VARCHAR(255),
+	number INT
+)

@@ -9,17 +9,16 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @RepositoryRestResource
-public interface FactorRepository extends CrudRepository<FactorRepository.Factor, Long> {
+public interface FactorRepository extends CrudRepository<FactorRepository.FactorEntity, Long> {
 
     @Data
-    @Entity
-    class Factor {
+    @Entity(name = "factor")
+    class FactorEntity {
 
         @Id
         @GeneratedValue
         private Long id;
         private Integer number;
         private String name;
-        private String description;
     }
 }

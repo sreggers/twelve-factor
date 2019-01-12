@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 @RepositoryRestResource
 public interface FactorRepository extends CrudRepository<FactorRepository.FactorEntity, Long> {
 
@@ -16,7 +18,7 @@ public interface FactorRepository extends CrudRepository<FactorRepository.Factor
     class FactorEntity {
 
         @Id
-        @GeneratedValue
+        @GeneratedValue(strategy = IDENTITY)
         private Long id;
         private Integer number;
         private String name;

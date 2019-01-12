@@ -3,3 +3,5 @@ spring:
     name: twelve-factor
   jpa:
     open-in-view: false
+  flyway:
+    enabled: false

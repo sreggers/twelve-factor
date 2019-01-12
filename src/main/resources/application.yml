@@ -3,9 +3,13 @@ spring:
     name: twelve-factor
   jpa:
     open-in-view: false
+    hibernate:
+      ddl-auto: update
 ---
 spring:
   profiles: local
+  datasource:
+    url: jdbc:mysql://localhost:3306/database?user=user&password=password
 info:
   application:
     name: ${spring.application.name}
@@ -15,9 +19,6 @@ spring:
   profiles: cloud
   datasource:
     url: ${vcap.services.twelve-factor-db.credentials.jdbc-url}
-  jpa:
-    hibernate:
-      ddl-auto: update
 info:
   application:
     name: ${vcap.application.name}

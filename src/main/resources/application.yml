@@ -4,14 +4,14 @@ spring:
   jpa:
     open-in-view: false
     hibernate:
-      ddl-auto: update
+      ddl-auto: validate
   flyway:
-    enabled: false
+    baseline-on-migrate: true
 ---
 spring:
   profiles: local
   datasource:
-    url: jdbc:mysql://localhost:3306/database?user=user&password=password
+    url: jdbc:mysql://localhost:3306/database?user=root&password=root-password
 info:
   application:
     name: ${spring.application.name}

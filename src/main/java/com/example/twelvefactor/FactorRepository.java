@@ -22,5 +22,6 @@ public interface FactorRepository extends CrudRepository<FactorRepository.Factor
         private Long id;
         private Integer number;
         private String name;
+        private String statement;
     }
 }

@@ -10,12 +10,12 @@ spring:
   profiles: local
 info:
   application:
-    name: ${spring.application.name}
+    environment: development
     platform: ${os.name}
 ---
 spring:
   profiles: cloud
 info:
   application:
-    name: ${vcap.application.name}
+    environment: ${vcap.application.space_name}
     platform: ${platform.name}

@@ -1,0 +1,79 @@
+version: 2.1
+executors:
+  cf-cli:
+    docker:
+      - image: governmentpaas/cf-cli
+  build:
+    docker:
+      - image: openjdk:8
+      - image: mysql
+        environment:
+          MYSQL_ROOT_PASSWORD=root-password
+          MYSQL_DATABASE=database
+          MYSQL_USER=user
+          MYSQL_PASSWORD=password
+  curl:
+    docker:
+      - image: buildpack-deps:curl
+commands:
+  cf-login:
+    steps:
+      - run: cf login -a $PWS_API_URL -u $PWS_USERNAME -p $PWS_PASSWORD -o $PWS_ORG -s $PWS_SPACE > /dev/null 2>&1
+jobs:
+  build:
+    executor: build
+    steps:
+      - checkout
+      - run: ./gradlew build
+      - persist_to_workspace:
+          root: ./
+          paths:
+            - build
+  deploy:
+    executor: cf-cli
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ./
+      - cf-login
+      - run: cf create-service cleardb spark twelve-factor-db > /dev/null 2>&1
+      - run: cf push -d $DOMAIN --hostname $HOSTNAME > /dev/null 2>&1
+  test:
+    executor: curl
+    steps:
+      - run: curl -f http://$HOSTNAME.$DOMAIN/actuator/info > /dev/null 2>&1
+      - run: >
+          curl -f -H "Content-Type: application/json" -d '{"name": "Codebase","number": 1}' http://$HOSTNAME.$DOMAIN/factors > /dev/null 2>&1
+  teardown:
+    executor: cf-cli
+    steps:
+      - cf-login
+      - run: cf stop twelve-factor > /dev/null 2>&1
+      - run: cf delete twelve-factor -f -r > /dev/null 2>&1
+      - run: cf delete-service twelve-factor-db -f > /dev/null 2>&1
+workflows:
+  version: 2.1
+  pipeline:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only: master
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
+      - test:
+          requires:
+            - deploy
+          filters:
+            branches:
+              only: master
+      - teardown:
+          requires:
+            - test
+          filters:
+            branches:
+              only: master

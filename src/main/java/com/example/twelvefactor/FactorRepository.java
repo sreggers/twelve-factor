@@ -11,11 +11,11 @@ import javax.persistence.Id;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @RepositoryRestResource
-public interface FactorRepository extends CrudRepository<FactorRepository.FactorEntity, Long> {
+public interface FactorRepository extends CrudRepository<FactorRepository.Factor, Long> {
 
     @Data
     @Entity(name = "factor")
-    class FactorEntity {
+    class Factor {
 
         @Id
         @GeneratedValue(strategy = IDENTITY)

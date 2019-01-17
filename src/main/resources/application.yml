@@ -14,7 +14,7 @@ spring:
     url: jdbc:mysql://localhost:3306/database?user=user&password=password
 info:
   application:
-    name: ${spring.application.name}
+    environment: development
     platform: ${os.name}
 ---
 spring:
@@ -23,5 +23,5 @@ spring:
     url: ${vcap.services.twelve-factor-db.credentials.jdbc-url}
 info:
   application:
-    name: ${vcap.application.name}
+    environment: ${vcap.application.space_name}
     platform: ${platform.name}

@@ -10,7 +10,7 @@ spring:
   profiles: local
 info:
   application:
-    environment: development
+    environment: local
     platform: ${os.name}
 ---
 spring:

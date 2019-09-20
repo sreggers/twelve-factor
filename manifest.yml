@@ -1,6 +1,7 @@
 applications:
   - name: twelve-factor
     path: build/libs/twelve-factor.jar
+    memory: 768M
     env:
       PLATFORM_NAME: Cloud Foundry
     services:

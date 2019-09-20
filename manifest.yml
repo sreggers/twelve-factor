@@ -6,3 +6,4 @@ applications:
       PLATFORM_NAME: Cloud Foundry
     services:
       - twelve-factor-db
+      - logging

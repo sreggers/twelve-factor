@@ -14,7 +14,7 @@ spring:
     url: jdbc:mysql://localhost:3306/database?user=root&password=root-password
 info:
   application:
-    environment: development
+    environment: local
     platform: ${os.name}
 ---
 spring:

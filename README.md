@@ -1,1 +1,1 @@
-# Twelve-Factor App with Spring and Cloud Foundry
+# Twelve-Factor App with Spring Boot and Heroku

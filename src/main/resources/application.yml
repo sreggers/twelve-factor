@@ -5,22 +5,33 @@ spring:
     open-in-view: false
   flyway:
     enabled: false
----
-spring:
-  profiles: local
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
 info:
   application:
-    environment: local
-    platform: ${os.name}
+    os: ${os.name}
+
 ---
 spring:
-  profiles: cloud
-  datasource:
-    url: ${vcap.services.twelve-factor-db.credentials.jdbc-url}
+  config:
+    activate:
+      on-profile: local
+info:
+  application:
+    platform: Local Machine
+    space: local-development
+---
+spring:
+  config:
+    activate:
+      on-profile: heroku
   jpa:
     hibernate:
       ddl-auto: update
 info:
   application:
-    environment: ${vcap.application.space_name}
-    platform: ${platform.name}
+    platform: Heroku
+    space: ${space.name}

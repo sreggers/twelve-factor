@@ -1,3 +1,5 @@
+server:
+  shutdown: graceful
 spring:
   application:
     name: twelve-factor
@@ -13,7 +15,6 @@ management:
 info:
   application:
     os: ${os.name}
-
 ---
 spring:
   config:

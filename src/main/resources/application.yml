@@ -22,6 +22,10 @@ spring:
   config:
     activate:
       on-profile: local
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: password
 info:
   application:
     platform: Local Machine

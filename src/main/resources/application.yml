@@ -29,8 +29,6 @@ spring:
   config:
     activate:
       on-profile: heroku
-  datasource:
-    url: ${vcap.services.twelve-factor-db.credentials.jdbc-url}
   jpa:
     hibernate:
       ddl-auto: update

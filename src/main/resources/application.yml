@@ -5,6 +5,8 @@ spring:
     name: twelve-factor
   jpa:
     open-in-view: false
+    hibernate:
+      ddl-auto: update
   flyway:
     enabled: false
 management:
@@ -29,9 +31,6 @@ spring:
   config:
     activate:
       on-profile: heroku
-  jpa:
-    hibernate:
-      ddl-auto: update
 info:
   application:
     platform: Heroku

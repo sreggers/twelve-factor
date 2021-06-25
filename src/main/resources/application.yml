@@ -3,5 +3,7 @@ spring:
     name: twelve-factor
   jpa:
     open-in-view: false
+    hibernate:
+      ddl-auto: update
   flyway:
     enabled: false

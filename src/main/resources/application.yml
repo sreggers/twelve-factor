@@ -6,10 +6,9 @@ spring:
   jpa:
     open-in-view: false
     hibernate:
-      ddl-auto: update
+      ddl-auto: validate
   flyway:
-    enabled: true
-    baseline-on-migrate: true
+    enabled: false
 management:
   endpoints:
     web:
@@ -40,3 +39,18 @@ info:
   application:
     platform: Heroku
     space: ${space.name}
+---
+spring:
+  config:
+    activate:
+      on-profile: database-migration
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+---
+spring:
+  config:
+    activate:
+      on-profile: no-web
+  main:
+    web-application-type: none

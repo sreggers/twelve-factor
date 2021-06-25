@@ -1,27 +1,42 @@
+server:
+  shutdown: graceful
 spring:
   application:
     name: twelve-factor
   jpa:
     open-in-view: false
     hibernate:
-      ddl-auto: validate
+      ddl-auto: update
   flyway:
+    enabled: true
     baseline-on-migrate: true
----
-spring:
-  profiles: local
-  datasource:
-    url: jdbc:mysql://localhost:3306/database?user=root&password=root-password
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
 info:
   application:
-    environment: local
-    platform: ${os.name}
+    os: ${os.name}
 ---
 spring:
-  profiles: cloud
+  config:
+    activate:
+      on-profile: local
   datasource:
-    url: ${vcap.services.twelve-factor-db.credentials.jdbc-url}
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: password
 info:
   application:
-    environment: ${vcap.application.space_name}
-    platform: ${platform.name}
+    platform: Local Machine
+    space: local-development
+---
+spring:
+  config:
+    activate:
+      on-profile: heroku
+info:
+  application:
+    platform: Heroku
+    space: ${space.name}

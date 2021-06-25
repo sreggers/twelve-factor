@@ -1,11 +1,9 @@
 version: '3'
 services:
-  mysql:
-    image: mysql
-    ports:
-      - "3306:3306"
+  postgres:
+    image: postgres:13.3
+    container_name: twelve-factor-postgres
     environment:
-      - MYSQL_ROOT_PASSWORD=root-password
-      - MYSQL_DATABASE=database
-      - MYSQL_USER=user
-      - MYSQL_PASSWORD=password
+    - POSTGRES_PASSWORD=password
+    ports:
+    - "5432:5432"

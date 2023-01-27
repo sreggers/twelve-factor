@@ -1,1 +1,1 @@
-ALTER TABLE factor ADD statement VARCHAR(255)
+ALTER TABLE factor ADD COLUMN statement VARCHAR(255)

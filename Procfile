@@ -1,0 +1,2 @@
+web: java -Dspring.profiles.active=heroku -Dserver.port=$PORT $JAVA_OPTS  -jar build/libs/twelve-factor.jar
+release: java -Dspring.profiles.active=heroku,database-migration,no-web $JAVA_OPTS  -jar build/libs/twelve-factor.jar
